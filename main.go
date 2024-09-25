@@ -11,8 +11,13 @@ import (
 
 func main() {
 	fmt.Println("Function start")
+
+	fmt.Println("give me the file path: ")
+	filesPath := ""
+	fmt.Scanln(&filesPath)
+
 	// open file
-	f, err := os.Open("doc.md")
+	f, err := os.Open(filesPath)
 
 	if err != nil {
 		log.Fatal(err)
@@ -29,7 +34,7 @@ func main() {
 	for scanner.Scan() {
 		// fmt.Printf("line Nr. : %s\n", scanner.Text())
 		lineText := scanner.Text()
-		if strings.Contains(lineText, "## ") {
+		if strings.Contains(lineText, "## ") && !strings.Contains(lineText, "### ") {
 
 			outResult = fmt.Sprintf("%s%s\n", outResult, scanner.Text())
 		}

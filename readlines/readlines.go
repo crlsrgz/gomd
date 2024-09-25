@@ -15,6 +15,7 @@ func Readlines() {
 	reader := bufio.NewReader(os.Stdin)
 
 	var lines []string
+
 	for {
 		line, err := reader.ReadString('\n')
 		if err != nil {
@@ -25,6 +26,7 @@ func Readlines() {
 		}
 		lines = append(lines, line)
 	}
+
 	fmt.Println("the text is:")
 	for _, line := range lines {
 		fmt.Println(line)
