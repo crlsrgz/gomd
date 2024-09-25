@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"gocli/readlines"
 	"log"
 	"os"
 	"strings"
@@ -25,10 +26,6 @@ func main() {
 
 	outResult := ""
 
-	var userInput string
-	fmt.Println("Give me input: ")
-	fmt.Scan(&userInput)
-
 	for scanner.Scan() {
 		// fmt.Printf("line Nr. : %s\n", scanner.Text())
 		lineText := scanner.Text()
@@ -42,5 +39,5 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Print(outResult)
-	fmt.Printf("user input is: %s\n", userInput)
+	readlines.Readlines()
 }
