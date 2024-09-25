@@ -1,4 +1,4 @@
-package readlines
+package userinput
 
 import (
 	"bufio"
@@ -8,8 +8,8 @@ import (
 	"strings"
 )
 
-func Readlines() {
-	fmt.Println("...reading lines...")
+func Pasteinput() {
+	fmt.Println("User wants to write or paste something")
 	fmt.Println("gimme some text: ")
 
 	reader := bufio.NewReader(os.Stdin)
@@ -31,5 +31,4 @@ func Readlines() {
 	for _, line := range lines {
 		fmt.Println(line)
 	}
-
 }
