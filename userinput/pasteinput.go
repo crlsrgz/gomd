@@ -31,6 +31,6 @@ func Pasteinput() {
 
 	fmt.Println("the text is:")
 	for _, line := range lines {
-		fmt.Println(line)
+		fmt.Printf("%s", line)
 	}
 }
