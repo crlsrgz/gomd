@@ -6,14 +6,16 @@ import (
 	"log"
 	"os"
 	"os/user"
+	"runtime"
 	"strings"
 )
 
 func Fileinput() {
 	usr, _ := user.Current()
 	dir := usr.HomeDir
-
-	fmt.Println("the directory is ", dir)
+	userOs := runtime.GOOS
+	fmt.Println("the OS is ", userOs)
+	fmt.Println("the OS directory is ", dir)
 
 	fmt.Println("give me the file path: ")
 	// var filesPath string

@@ -21,9 +21,11 @@ func Pasteinput() {
 		if err != nil {
 			log.Fatal(err)
 		}
+
 		if len(strings.TrimSpace(line)) == 0 {
 			break
 		}
+
 		lines = append(lines, line)
 	}
 

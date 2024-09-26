@@ -20,6 +20,7 @@ func main() {
 	} else if userOption == "p" {
 
 		fmt.Printf("User chosed %s", userOption)
+		userinput.Pasteinput()
 
 	} else {
 		fmt.Println("wrong input")
