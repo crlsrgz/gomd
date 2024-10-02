@@ -5,28 +5,27 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/user"
-	"runtime"
+	"path/filepath"
 	"strings"
 )
 
 func Fileinput() {
-	usr, _ := user.Current()
-	dir := usr.HomeDir
-	userOs := runtime.GOOS
-	fmt.Println("the OS is ", userOs)
-	fmt.Println("the OS directory is ", dir)
 
-	fmt.Println("give me the file path: ")
-	// var filesPath string
-	// fmt.Scan(&userOption)
+	fmt.Println("-> Give me the file path: ")
 	filesPath := ""
 	_, errPath := fmt.Scanln(&filesPath)
 	if errPath != nil {
 		log.Fatal(errPath)
 	}
-	filesPath = dir + "/" + filesPath
-	fmt.Println("filesPath is ", filesPath)
+
+	filesPath = filepath.ToSlash(filesPath)
+
+	if filesPath[:1] == "/" {
+		filesPath = filesPath[1:]
+	}
+
+	fmt.Println(" -> filesPath is ", filesPath)
+
 	// open file
 	f, err := os.Open(filesPath)
 
@@ -43,11 +42,22 @@ func Fileinput() {
 	outResult := ""
 
 	for scanner.Scan() {
-		// fmt.Printf("line Nr. : %s\n", scanner.Text())
 		lineText := scanner.Text()
+
 		if strings.Contains(lineText, "## ") && !strings.Contains(lineText, "### ") {
 
-			outResult = fmt.Sprintf("%s%s\n", outResult, scanner.Text())
+			lineText = strings.TrimSpace(lineText)
+			lineText = strings.ToLower(lineText)
+			lineText = strings.Replace(lineText, "## ", "", -1)
+
+			linkName := "- [" + lineText + "]"
+
+			linkAdress := strings.Replace(lineText, " ", "-", -1)
+			linkAdress = "(#" + linkAdress + ")"
+
+			linkForIndex := linkName + linkAdress
+
+			outResult = fmt.Sprintf("%s%s\n", outResult, linkForIndex)
 		}
 	}
 	if err := scanner.Err(); err != nil {

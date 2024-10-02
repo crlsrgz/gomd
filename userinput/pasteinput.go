@@ -3,34 +3,36 @@ package userinput
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 	"strings"
 )
 
 func Pasteinput() {
-	fmt.Println("User wants to write or paste something")
-	fmt.Println("gimme some text: ")
 
 	reader := bufio.NewReader(os.Stdin)
+	lines := []string{}
 
-	var lines []string
+	fmt.Println("Enter multiline text (type 'exit' to finish):")
 
 	for {
 		line, err := reader.ReadString('\n')
 		if err != nil {
-			log.Fatal(err)
+			fmt.Printf("Error reading input: %v\n", err)
+			break
 		}
 
-		if len(strings.TrimSpace(line)) == 0 {
+		// Remove trailing newline character
+		line = strings.TrimSpace(line)
+
+		if line == "" && len(lines) > 0 {
 			break
 		}
 
 		lines = append(lines, line)
 	}
 
-	fmt.Println("the text is:")
-	for _, line := range lines {
-		fmt.Printf("%s", line)
+	fmt.Println("\nPasted text:")
+	for _, l := range lines {
+		fmt.Println(l)
 	}
 }

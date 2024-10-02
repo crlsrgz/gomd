@@ -14,12 +14,12 @@ func main() {
 
 	if userOption == "f" {
 
-		fmt.Printf("User chosed %s", userOption)
+		fmt.Printf("User chosed %s\n", userOption)
 		userinput.Fileinput()
 
 	} else if userOption == "p" {
 
-		fmt.Printf("User chosed %s", userOption)
+		fmt.Printf("User chosed %s\n", userOption)
 		userinput.Pasteinput()
 
 	} else {
