@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
 )
@@ -15,6 +16,8 @@ func Pasteinput() {
 
 	// Store lines in array
 	lines := []string{}
+
+	fmt.Println("THe OS is", runtime.GOOS)
 
 	fmt.Println("Enter text (Ctrl+D to end input on Linux/Mac, Ctrl+Z then Enter on Windows):")
 
