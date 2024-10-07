@@ -4,15 +4,19 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
 func Pasteinput() {
 
+	// Create a new reader to read from standard input
 	reader := bufio.NewReader(os.Stdin)
+
+	// Store lines in array
 	lines := []string{}
 
-	fmt.Println("Enter multiline text (type 'exit' to finish):")
+	fmt.Println("Enter text (Ctrl+D to end input on Linux/Mac, Ctrl+Z then Enter on Windows):")
 
 	for {
 		line, err := reader.ReadString('\n')
@@ -21,14 +25,21 @@ func Pasteinput() {
 			break
 		}
 
-		// Remove trailing newline character
+		// CLean up
 		line = strings.TrimSpace(line)
 
-		if line == "" && len(lines) > 0 {
+		// try a command
+		if line == "exit" {
 			break
 		}
+		if line == "" && len(line) == 0 {
+			fmt.Printf("Empty line do you want to stop or continue\n\n")
+			continue
+		}
 
+		line = line + " -- " + strconv.Itoa(len(line))
 		lines = append(lines, line)
+
 	}
 
 	fmt.Println("\nPasted text:")
