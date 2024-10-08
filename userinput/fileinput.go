@@ -60,9 +60,10 @@ func Fileinput() {
 			outResult = fmt.Sprintf("%s%s\n", outResult, linkForIndex)
 		}
 	}
-	if err := scanner.Err(); err != nil {
 
+	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
+
 	fmt.Print(outResult)
 }

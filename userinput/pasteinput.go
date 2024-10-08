@@ -7,6 +7,8 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
+
+	"github.com/fatih/color"
 )
 
 func Pasteinput() {
@@ -16,12 +18,23 @@ func Pasteinput() {
 
 	// Store lines in array
 	lines := []string{}
+	// Operating system
+	operatingSystem := runtime.GOOS
 
-	fmt.Println("THe OS is", runtime.GOOS)
+	if operatingSystem == "windows" {
 
-	fmt.Println("Enter text (Ctrl+D to end input on Linux/Mac, Ctrl+Z then Enter on Windows):")
+		color.Cyan("::: Usage :::\n")
+		color.Blue("1. Enter or Paste text\n2. Press Ctrl+Z\n3. Press Enter:\n\n")
+	} else if operatingSystem == "linux" || operatingSystem == "darwin" {
+
+		fmt.Print("1. Enter or Paste text\n2. Press Ctrl+D\n3. Press Enter:\n\n")
+	} else {
+
+		fmt.Print("1. Enter or Paste text\n2. Press Ctrl+D on Linux and Mac, Press Ctrl+Z on Windows\n3. Press Enter:\n\n")
+	}
 
 	for {
+
 		line, err := reader.ReadString('\n')
 		if err != nil {
 			fmt.Printf("Error reading input: %v\n", err)
@@ -32,11 +45,12 @@ func Pasteinput() {
 		line = strings.TrimSpace(line)
 
 		// try a command
-		if line == "exit" {
+		if line == "exit -n" {
 			break
 		}
 		if line == "" && len(line) == 0 {
-			fmt.Printf("Empty line do you want to stop or continue\n\n")
+			color.Red("Empty line detected:")
+			fmt.Printf("If you want to stop type \"exit -n\" \n\n")
 			continue
 		}
 
@@ -45,8 +59,15 @@ func Pasteinput() {
 
 	}
 
-	fmt.Println("\nPasted text:")
-	for _, l := range lines {
-		fmt.Println(l)
+	// fmt.Println("\nPasted text:")
+	// for _, l := range lines {
+	// 	fmt.Println(l)
+	// }
+	var myOutput string
+	for _, line := range lines {
+		myOutput = myOutput + line + "\n"
 	}
+	fmt.Println("\nPasted text in Block:")
+	fmt.Println(myOutput)
+
 }
