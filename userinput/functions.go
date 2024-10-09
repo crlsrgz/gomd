@@ -20,7 +20,8 @@ func BuildIndexList(lineText string) string {
 
 		linkForIndex := linkName + linkAdress
 
-		outResult = outResult + linkForIndex
+		outResult = outResult + linkForIndex + "\n"
 	}
+
 	return outResult
 }

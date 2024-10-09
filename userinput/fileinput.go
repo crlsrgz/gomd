@@ -23,7 +23,7 @@ func Fileinput() {
 		filesPath = filesPath[1:]
 	}
 
-	fmt.Println(" -> filesPath is ", filesPath)
+	fmt.Printf("--> filesPath is %s\n", filesPath)
 
 	// open file
 	f, err := os.Open(filesPath)
@@ -42,12 +42,16 @@ func Fileinput() {
 
 	for scanner.Scan() {
 		lineText := scanner.Text()
-		outResult = BuildIndexList(lineText)
+		if lineText != "" {
+
+			outResult = outResult + BuildIndexList(lineText)
+
+		}
 	}
 
 	if err := scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
 
-	fmt.Print(outResult)
+	fmt.Println(outResult)
 }
