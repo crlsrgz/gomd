@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"runtime"
-	"strconv"
 	"strings"
 
 	"github.com/fatih/color"
@@ -23,14 +22,15 @@ func Pasteinput() {
 
 	if operatingSystem == "windows" {
 
-		color.Cyan("::: Usage :::\n")
-		color.Blue("1. Enter or Paste text\n2. Press Ctrl+Z\n3. Press Enter:\n\n")
+		color.Blue("::: Usage :::\n")
+		color.Blue(MessageInstructionsWindows)
+
 	} else if operatingSystem == "linux" || operatingSystem == "darwin" {
 
-		fmt.Print("1. Enter or Paste text\n2. Press Ctrl+D\n3. Press Enter:\n\n")
+		fmt.Print(MessageInstructionLinux)
 	} else {
 
-		fmt.Print("1. Enter or Paste text\n2. Press Ctrl+D on Linux and Mac, Press Ctrl+Z on Windows\n3. Press Enter:\n\n")
+		fmt.Print(MessageInstructionOther)
 	}
 
 	for {
@@ -48,13 +48,14 @@ func Pasteinput() {
 		if line == "exit -n" {
 			break
 		}
+
 		if line == "" && len(line) == 0 {
 			color.Red("Empty line detected:")
-			fmt.Printf("If you want to stop type \"exit -n\" \n\n")
+			fmt.Printf("Carry on pasting or typing; to stop type \"exit -n\" \n\n")
 			continue
 		}
 
-		line = line + " -- " + strconv.Itoa(len(line))
+		// line = line + " -- " + strconv.Itoa(len(line))
 		lines = append(lines, line)
 
 	}
@@ -67,7 +68,8 @@ func Pasteinput() {
 	for _, line := range lines {
 		myOutput = myOutput + line + "\n"
 	}
-	fmt.Println("\nPasted text in Block:")
+
+	fmt.Printf("\nIndex ready: \n")
 	fmt.Println(myOutput)
 
 }

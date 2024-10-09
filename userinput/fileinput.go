@@ -6,7 +6,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
 func Fileinput() {
@@ -43,22 +42,7 @@ func Fileinput() {
 
 	for scanner.Scan() {
 		lineText := scanner.Text()
-
-		if strings.Contains(lineText, "## ") && !strings.Contains(lineText, "### ") {
-
-			lineText = strings.TrimSpace(lineText)
-			lineText = strings.ToLower(lineText)
-			lineText = strings.Replace(lineText, "## ", "", -1)
-
-			linkName := "- [" + lineText + "]"
-
-			linkAdress := strings.Replace(lineText, " ", "-", -1)
-			linkAdress = "(#" + linkAdress + ")"
-
-			linkForIndex := linkName + linkAdress
-
-			outResult = fmt.Sprintf("%s%s\n", outResult, linkForIndex)
-		}
+		outResult = BuildIndexList(lineText)
 	}
 
 	if err := scanner.Err(); err != nil {
