@@ -42,10 +42,8 @@ func Fileinput() {
 
 	for scanner.Scan() {
 		lineText := scanner.Text()
-		if lineText != "" {
-
+		if lineText != "" && lineText != "\n" {
 			outResult = outResult + BuildIndexList(lineText)
-
 		}
 	}
 
