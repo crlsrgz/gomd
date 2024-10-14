@@ -51,5 +51,7 @@ func Fileinput() {
 		log.Fatal(err)
 	}
 
+	fmt.Printf("\n:::::::::::::::: \n")
+	fmt.Printf("\nIndex ready: \n")
 	fmt.Println(outResult)
 }
