@@ -15,10 +15,10 @@ func Pasteinput() {
 	// Create a new reader to read from standard input
 	reader := bufio.NewReader(os.Stdin)
 
-	// Store lines in array
-	lines := []string{}
 	// Operating system
 	operatingSystem := runtime.GOOS
+
+	outResult := ""
 
 	if operatingSystem == "windows" {
 
@@ -55,21 +55,12 @@ func Pasteinput() {
 			continue
 		}
 
-		// line = line + " -- " + strconv.Itoa(len(line))
-		lines = append(lines, line)
+		outResult = outResult + BuildIndexList(line)
 
 	}
 
-	// fmt.Println("\nPasted text:")
-	// for _, l := range lines {
-	// 	fmt.Println(l)
-	// }
-	var myOutput string
-	for _, line := range lines {
-		myOutput = myOutput + line + "\n"
-	}
-
+	fmt.Printf("\n:::::::::::::::: \n")
 	fmt.Printf("\nIndex ready: \n")
-	fmt.Println(myOutput)
+	fmt.Println(outResult)
 
 }
