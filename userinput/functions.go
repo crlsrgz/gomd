@@ -34,9 +34,10 @@ func BuildIndexList(lineText string) string {
 			linkAdress = "(#" + linkAdress + ")"
 
 		}
-
 		linkForIndex := linkName + linkAdress
 
+		// length := strconv.Itoa(len(lineText))
+		// outResult = outResult + linkForIndex + length + lineText + "\n"
 		outResult = outResult + linkForIndex + "\n"
 	}
 
