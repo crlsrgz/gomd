@@ -49,12 +49,6 @@ func Pasteinput() {
 			break
 		}
 
-		if line == "" && len(line) == 0 {
-			color.Red("Empty line detected:")
-			fmt.Printf("Carry on pasting or typing; to stop type \"exit -n\" \n\n")
-			continue
-		}
-
 		outResult = outResult + BuildIndexList(line)
 
 	}
