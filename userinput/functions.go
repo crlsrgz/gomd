@@ -7,7 +7,7 @@ import (
 func BuildIndexList(lineText string) string {
 	outResult := ""
 
-	if strings.Contains(lineText, "# ") {
+	if strings.Contains(lineText, "# ") && !strings.Contains(lineText, "#### ") {
 
 		lineText = strings.TrimSpace(lineText)
 		lineText = strings.ToLower(lineText)
@@ -15,8 +15,6 @@ func BuildIndexList(lineText string) string {
 		linkAdress := ""
 
 		switch {
-		case strings.Contains(lineText, "###### ") || strings.Contains(lineText, "##### ") || strings.Contains(lineText, "#### "):
-			break
 		case strings.Contains(lineText, "# ") && !strings.Contains(lineText, "## "):
 			lineText = strings.Replace(lineText, "# ", "", -1)
 			linkName = "- [" + lineText + "]"
